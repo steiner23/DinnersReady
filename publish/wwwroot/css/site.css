@@ -1,0 +1,600 @@
+h1 {
+  font-family: "Lora-Bold", Helvetica, Arial, sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+h2 {
+  font-family: "Lora-Bold", Helvetica, Arial, sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+  font-size: 1.17em;
+}
+
+h4 {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
+
+h5 {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+  font-size: .83em;
+}
+
+h6 {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+  font-size: .67em;
+}
+
+#recipeTable_info, #recipeTable_previous, #recipeTable_next, .paginate_button {
+  font-family: "Alegreya-Bold", Helvetica, Arial, sans-serif;
+}
+
+.btn, .callout-header {
+  font-family: "Alegreya-Bold", Helvetica, Arial, sans-serif;
+}
+
+.btn {
+  border-color: #262228;
+  border-width: 1px;
+}
+
+.tableHeader {
+  font-family: "Alegreya-Bold", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+td {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+}
+
+label, p {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+}
+
+.largeLegend {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+.smallLegend {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
+input, select, textarea {
+  font-family: "Alegreya-Regular", Helvetica, Arial, sans-serif;
+}
+
+#logo {
+  height: 40px;
+  width: auto;
+}
+
+.nav-div {
+  margin-bottom: 100px;
+  padding-bottom: 100px;
+}
+
+nav {
+  -webkit-transition: background 0.4s ease-in-out;
+  transition: background 0.4s ease-in-out;
+  background: #0375B4;
+}
+
+.is-hidden {
+  opacity: 0;
+  -webkit-transition: opacity 0.2s, -webkit-transform 0.4s;
+  transition: opacity 0.2s, -webkit-transform 0.4s;
+  transition: transform 0.4s, opacity 0.2s;
+  transition: transform 0.4s, opacity 0.2s, -webkit-transform 0.4s;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.navbar-hide {
+  pointer-events: none;
+  opacity: 0;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007849;
+  border-color: #262228;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #007849;
+  border-color: #262228;
+}
+
+body {
+  background: #FFC800;
+  background-image: url("/images/feast.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0rem;
+}
+
+.body-content {
+  margin-top: 70px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  body {
+    margin-bottom: 2rem;
+  }
+}
+
+/*
+legend { 
+    color: rgb(0, 255, 128);
+    font-style: italic;
+}
+
+h1 {
+    font-style: italic, bold;
+    color: dark-blue;
+    background-color: yellow;
+}
+*/
+/*
+.backgroundProps {
+    background-color: $color1;
+    margin: 5px;
+    padding: 20px;
+   // border: 30px;
+    border-radius: 25px;
+}
+*/
+.backgroundTitleProps1 {
+  width: 65%;
+  text-align: center;
+  background-color: #FFC800;
+  margin-top: 0px;
+  margin-bottom: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.backgroundTitleProps2 {
+  width: 42%;
+  text-align: center;
+  background-color: #FFC800;
+  margin: auto;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.recipesBreak {
+  margin: 0px;
+}
+
+#recipesContainer {
+  margin-top: 0px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+#ingredientNameFeedback {
+  margin: 8px 0px;
+  font-size: 24px;
+}
+
+.invalidRequired {
+  border-color: red;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.validRequired {
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+}
+
+input[type=checkbox] {
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+.courselabel {
+  margin-left: 5px;
+}
+
+.recipeImageThumb {
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+}
+
+#recipeTable_wrapper {
+  background-color: #007849;
+  margin: 10px 0px;
+  border-radius: 40px;
+  padding-top: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#recipeTable_wrapper label {
+  font-weight: bold;
+}
+
+.backgroundTableProps {
+  background-color: #007849;
+  margin-top: 10px;
+  padding: 0px;
+}
+
+.backgroundTableProps tr {
+  background-color: #FFC800;
+}
+
+.backgroundTableProps td {
+  background-color: #FFC800;
+}
+
+.paginate_button {
+  color: #000000 !important;
+  font-weight: bold !important;
+  display: inline-block;
+  padding: 6px 9px !important;
+  vertical-align: middle !important;
+}
+
+.paginate_button .paginate_button:hover {
+  background-color: #007849 !important;
+  color: #ffffff !important;
+}
+
+.paginate_button .paginate_button.current {
+  background-color: #262228 !important;
+  color: #ffffff !important;
+}
+
+#recipeTable_info, #recipeTable_previous, #recipeTable_next {
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: middle !important;
+}
+
+#recipeTable_length {
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+#recipeTable_filter {
+  float: right;
+  vertical-align: middle !important;
+  margin-bottom: 2px;
+}
+
+.sorting_1 {
+  color: #ffffff;
+  background-color: #262228 !important;
+}
+
+.thumbnail {
+  cursor: pointer;
+  border-style: solid !important;
+  border-width: 0.20em !important;
+  border-color: #007849 !important;
+}
+
+/*
+.container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;    
+    width: 100% !important;
+}
+
+.body-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+}
+
+#viewTarget {
+    width: 100%;
+}
+*/
+#viewLoadingClass {
+  text-align: center;
+  width: 300px;
+  height: 200px;
+}
+
+.loading-area {
+  background-color: #FFF;
+  border-radius: 20px !important;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 30%;
+  width: 15%;
+}
+
+.loading-text {
+  color: #000;
+  font-size: 15px;
+}
+
+.loading-image {
+  height: 80px;
+  width: 80px;
+  padding-top: 20px;
+}
+
+.tdButtonClass {
+  margin-top: 5px;
+}
+
+.noSpinners > input[type=number] {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.instructNotes {
+  margin-bottom: 1em;
+}
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  color: #ffffff;
+  background-color: #0375B4;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.2em;
+  vertical-align: middle;
+}
+
+footer p {
+  font-size: 1em;
+  vertical-align: middle;
+  margin-bottom: 0 !important;
+}
+
+.backgroundTitleProps3 {
+  width: 60%;
+  text-align: center;
+  background-color: #FFC800;
+  margin: auto;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+#recipeForm {
+  background-color: #FFC800;
+  width: 100%;
+  margin: auto;
+  padding: 1em;
+  border-width: 1.5em;
+  border-style: groove;
+  border-color: #007849;
+  border-radius: 1em;
+}
+
+.recipeview, .recipeviewopt {
+  margin-bottom: 1rem;
+}
+
+#edButtonBottom {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+/*
+#likeRecipeTotal {
+    text-align: center;
+    vertical-align: middle !important;
+    border-radius: 3px;
+}
+*/
+.recipeViewImageThumb {
+  width: 15em;
+  height: 15em;
+}
+
+.delButton {
+  color: #262228;
+  font-weight: bold;
+  border-width: 0 !important;
+  border-radius: 0.25em;
+  margin: 0 !important;
+  padding: 0.40em !important;
+}
+
+.sectionDiv {
+  margin-top: 2em;
+}
+
+.backgroundTitleProps4 {
+  width: 60%;
+  text-align: center !important;
+  background-color: #FFC800;
+  margin-bottom: .05em;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.headeralign {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.keyfield {
+  color: red;
+}
+
+.backg {
+  background-color: #262228;
+  opacity: 0.5;
+  z-index: 888;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 100%;
+  height: 100vh;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 30% auto;
+  border-radius: 50%;
+  border: 1.5em solid #262228;
+  border-color: #FFC800 transparent #007849 transparent;
+  -webkit-animation: lds-dual-ring 1.2s linear infinite;
+          animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@-webkit-keyframes lds-dual-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.callout {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  margin-left: 20px;
+  max-width: 17rem;
+}
+
+.callout .callout-header {
+  padding: 25px 15px;
+  background: #262228;
+  font-size: 30px;
+  font-weight: bold;
+  color: #f00f0f;
+}
+
+.callout .callout-container {
+  padding: 15px;
+  background-color: #262228;
+  color: #f00f0f;
+}
+
+.callout .closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: #f00f0f;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.callout #webDevCalloutBtn {
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.callout .closebtn:hover {
+  color: #ece1e1;
+}
+
+.alertify.alert alertify-notifier .ajs-message .ajs-sucess .ajs-warning .ajs-error {
+  color: #262228;
+  background: #FFC800;
+  border-color: #007849;
+}
+
+.flex-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #FFC800;
+}
+
+.flex-container > div {
+  background-color: #FFC800;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+/*# sourceMappingURL=site.css.map */

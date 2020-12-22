@@ -1,0 +1,23 @@
+
+
+
+additionalNotes: null​​
+cookMethod: "oven"​​
+cookingTime: "mins30to59"​​
+course: "breakfast|lunch|dinner|other|"​​
+cuisine: "british"​​
+description: "Fish Pie using a variety of fish species"​​
+dietaryRequirement: null​​
+event: null​​
+freezable: true​​
+genDate: "2020-09-22T12:27:59.5850234"​​
+goesWith: "Peas, green vegetables"​​
+mainFoodCategory: " Fish/Seafood "​​
+name: "Fish Pie"​​
+recipeId: 2​​
+recipeIdent: "w0aq07V9zpo2WuNt"​​
+reviewedStatus: null​​
+season: "allYearRound"​​
+servings: 6​​
+userLikes: 0​​
+viewCount: 0

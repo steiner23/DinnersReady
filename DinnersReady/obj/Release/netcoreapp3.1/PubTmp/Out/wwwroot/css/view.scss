@@ -1,0 +1,58 @@
+﻿$backColor: #fbde75;
+$txtColor: #000000;
+
+input:disabled {
+    color: $txtColor;
+    background-color: $backColor;
+}
+
+textarea:disabled {
+    color: $txtColor;
+    background-color: $backColor;
+    resize: none;
+}
+
+#breakfast:disabled, #lunch:disabled, #dinner:disabled, #other:disabled, input[type=checked]:disabled {
+    color: $txtColor;
+    font-weight: bold;
+    background-color: $backColor;    
+}
+
+radio:disabled, #trueFreeze, #falseFreeze {
+    color: $txtColor;
+    background-color: $backColor;    
+}
+
+select:disabled {
+    color: $txtColor;
+    background-color: $backColor;    
+}
+
+select:enabled {
+    color: $txtColor;
+    font-weight: bold;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera, Firefox*/
+select:disabled{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.unblockScroll {  
+    cursor: default !important;
+    pointer-events: all !important;
+}

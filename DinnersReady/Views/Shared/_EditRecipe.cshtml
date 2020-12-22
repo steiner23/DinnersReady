@@ -1,0 +1,846 @@
+﻿@model DinnersReadyCore.ViewModels.EditRecipe.EditVM
+
+<div id="alertBannerPlaceholder"></div>
+
+<div class="container-fluid d-flex justify-content-center wrap shadow mt-4">
+    <h1 id="mainHeader" class="backgroundTitleProps4">Editing Recipe: '@Model.localRecipe.Name'</h1>
+    <br />
+</div>
+
+<div class="container-fluid mt-3">
+
+    <div class="container container-fluid">
+        <form id="recipeForm">
+
+            <div asp-validation-summary="All"></div>
+            <input type="hidden" id="recipeIdent" value="@Model.localRecipe.RecipeIdent">
+
+            <div id="recipeFeedbackDivId" class="hide">
+                <p id="recipeFeedbackParaId" class="hide"></p>
+            </div>
+
+            <div class="sectionDiv">
+                <div class="d-flex flex-wrap justify-content-start justify-content-between">
+
+                    <div class="flex-column">
+                        <div class="recipeview m-2 p-2 align-middle w-50">
+                            <fieldset>
+                                <legend class="largeLegend">Name: </legend>
+                                <input type="text" id="recipeName" name="recipeName" size="50" maxlength="150"
+                                    value="@Model.localRecipe.Name" required enabled onchange="valueChange('recipeName')"><br />
+                                <input type="hidden" id="recipeNameChange" value="false">
+                            </fieldset>
+                        </div>
+
+                        <div class="recipeview m-2 p-2 align-middle w-50">
+                            <fieldset>
+                                <legend class="largeLegend">Description:</legend>
+                                <input type="text" id="description" name="description" size="50" maxlength="150"
+                                    placeholder="-- optional --" value="@Model.localRecipe.Description"
+                                    onchange="valueChange('description')"><br />
+                                <input type="hidden" id="descriptionChange" value="false">
+                            </fieldset>
+                        </div>
+
+                        <div id="servingsDiv" class="recipeview m-2 p-2 align-middle w-33">
+                            <fieldset>
+                                <legend class="largeLegend">Servings:</legend>
+                                <input type="number" id="servings" name="servings" min="1" max="100" value="@Model.localRecipe.Servings"
+                                    required onchange="valueChange('servings')" /><br />
+                                <input type="hidden" id="servingsChange" value="false">
+                            </fieldset>
+                        </div>
+                    </div> 
+
+                    <div id="courseDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset id="course" class="course-checkbox" required>
+                            <legend class="largeLegend">Meal:</legend>
+
+                            @if (Model.localRecipe.Course.Contains("Breakfast"))
+                            {
+                                <input type="checkbox" id="breakfast" class="coursecheck" name="breakfast" value="Breakfast" checked
+                                    onchange="valueChange('breakfast')" />
+                                <input type="hidden" id="breakfastChange" value="false">
+                            }
+                            else
+                            { 
+                                <input type="checkbox" id="breakfast" class="coursecheck" name="breakfast" value="Breakfast"
+                                    onchange="valueChange('breakfast')" />
+                                <input type="hidden" id="breakfastChange" value="false">
+                            }
+                            <label for="breakfast" class="courselabel">Breakfast</label><br />
+
+                            @if (Model.localRecipe.Course.Contains("Lunch"))
+                            {
+                                <input type="checkbox" id="lunch" class="coursecheck" name="lunch" value="Lunch" checked
+                                    onchange="valueChange('lunch')" />
+                                <input type="hidden" id="lunchChange" value="false">
+                            }
+                            else
+                            { 
+                                <input type="checkbox" id="lunch" class="coursecheck" name="lunch" value="Lunch"
+                                    onchange="valueChange('lunch')" />
+                                <input type="hidden" id="lunchChange" value="false">
+                            }
+                            <label for="lunch" class="courselabel">Lunch</label><br />
+
+                            @if (Model.localRecipe.Course.Contains("Dinner"))
+                            {
+                                <input type="checkbox" id="dinner" class="coursecheck" name="dinner" value="Dinner" checked
+                                    onchange="valueChange('dinner')" />
+                                <input type="hidden" id="dinnerChange" value="false">
+                            }
+                            else
+                            { 
+                                <input type="checkbox" id="dinner" class="coursecheck" name="dinner" value="Dinner"
+                                    onchange="valueChange('dinner')" />
+                                <input type="hidden" id="dinnerChange" value="false">
+                            }
+                            <label for="dinner" class="courselabel">Dinner</label><br />
+
+                            @if (Model.localRecipe.Course.Contains("Other"))
+                            {
+                                <input type="checkbox" id="other" class="coursecheck" name="other" value="Other" checked
+                                    onchange="valueChange('other')" />
+                                <input type="hidden" id="otherChange" value="false">
+                            }
+                            else
+                            { 
+                                <input type="checkbox" id="other" class="coursecheck" name="other" value="Other"
+                                    onchange="valueChange('other')" />
+                                <input type="hidden" id="otherChange" value="false">
+                            }
+                            <label for="other" class="courselabel">Other</label><br />
+                        </fieldset>
+                    </div>
+
+                    <div class="flex-column">
+                        <div class="recipeview m-2 p-2 align-middle w-50">
+                            <fieldset>
+                                <input type="file" id="recipeimage" class="viewRecipeImage" name="recipeimage" accept="image/*"
+                                    onchange="displayimage(event)" value="-- optional --" enabled><br />
+                                <img id="fileoutput" src="@Model.localRecipe.Photo" width="200" height="200" />
+                                <input type="hidden" id="recipeimageChange" value="false" />
+                            </fieldset><br />
+                        </div>
+                    </div>
+
+                    <div id="cookingmethodDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset required>
+                            <legend class="largeLegend">Cooking Method:</legend>
+                            <select id="cookingMethod" name="cookingMethod" onchange="valueChange('cookingMethod')">
+                                @{
+                                    if (Model.localRecipe.CookMethod == "Hob")
+                                    {
+                                        <option value="Hob" selected>Hob</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Hob">Hob</option>
+                                    }
+                                    if (Model.localRecipe.CookMethod == "Oven")
+                                    {
+                                        <option value="Oven" selected>Oven</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Oven">Oven</option>
+                                    }
+                                    if (Model.localRecipe.CookMethod == "Slow Cooker")
+                                    {
+                                        <option value="Slow Cooker" selected>Slow Cooker</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Slow Cooker">Slow Cooker</option>
+                                    }
+                                    if (Model.localRecipe.CookMethod == "Other")
+                                    {
+                                        <option value="Other" selected>Other</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Other">Other</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="cookingMethodChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div id="cookingTimeDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset required>
+                            <legend class="largeLegend">Cooking Time:</legend>
+                            <select id="cookingTime" name="cookingTime" required onchange="valueChange('cookingTime')">
+                                @{
+                                    if (@Model.localRecipe.CookingTime == "minsLessThan30")
+                                    {
+                                        <option selected value="minsLessThan30">Less than 30 mins</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="minsLessThan30">Less than 30 mins</option>
+                                    }
+
+                                    if (@Model.localRecipe.CookingTime == "mins30to59")
+                                    {
+                                        <option selected value="mins30to59">30 to 60 mins</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="mins30to59">30 to 60 mins</option>
+                                    }
+
+                                    if (@Model.localRecipe.CookingTime == "mins60to90")
+                                    {
+                                        <option selected value="mins60to90">60 to 90 mins</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="mins60to90">60 to 90 mins</option>
+                                    }
+
+                                    if (@Model.localRecipe.CookingTime == "mins90to120")
+                                    {
+                                        <option selected value="mins90to120">90 to 120 mins</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="mins90to120">90 to 120 mins</option>
+                                    }
+
+                                    if (@Model.localRecipe.CookingTime == "minsover120")
+                                    {
+                                        <option selected value="minsover120">Over 120 mins</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="minsover120">Over 120 mins</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="cookingTimeChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div id="freezeDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset>
+                            <legend class="largeLegend">Freezable?</legend>
+                            @if (Model.localRecipe.Freezable == true)
+                            {
+                                <label for="yes">Yes</label>
+                                <input type="radio" id="trueFreeze" name="freezable" value="Yes" required checked
+                                    onchange="valueChange('trueFreeze')" />
+                                <input type="hidden" id="trueFreezeChange" value="false">
+                                <label for="no">No</label>
+                                <input type="radio" id="falseFreeze" name="freezable" value="No" required
+                                    onchange="valueChange('falseFreeze')" /><br />
+                                <input type="hidden" id="falseFreezeChange" value="false">
+                            }
+                            else
+                            {
+                                <label for="yes">Yes</label>
+                                <input type="radio" id="trueFreeze" name="freezable" value="Yes" required
+                                    onchange="valueChange('trueFreeze')" />
+                                <input type="hidden" id="trueFreezeChange" value="false">
+                                <label for="no">No</label>
+                                <input type="radio" id="falseFreeze" name="freezable" value="No" required checked
+                                    onchange="valueChange('falseFreeze')" /><br />
+                                <input type="hidden" id="falseFreezeChange" value="false">
+                            }
+                        </fieldset>
+                    </div>
+
+                    <div id="mainFoodCatDiv" class="recipeview m-2 p-2 w-33 align-middle">
+                        <fieldset>
+                            <legend class="largeLegend">Main Food Category:</legend>
+                            <select id="mainFoodCategory" name="mainFoodCategory" onchange="valueChange('mainFoodCategory')">
+                                @foreach (var category in Model.MainFoodCategories)
+                                {
+                                    if (category == Model.localRecipe.FoodCategory)
+                                    {
+                                        <option value=@category selected>@category</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@category>@category</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="mainFoodCategoryChange" value="false">
+                        </fieldset><br />
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33">
+                        <fieldset>
+                            <legend class="largeLegend">Season</legend>
+                            <select id="season" name="season" onchange="valueChange('season')">
+                                @{
+                                    if (Model.localRecipe.Season == "Spring")
+                                    {
+                                        <option value="Spring" selected>Spring</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Spring">Spring</option>
+                                    }
+
+                                    if (Model.localRecipe.Season == "Summer")
+                                    {
+                                        <option value="Summer" selected>Summer</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Summer">Summer</option>
+                                    }
+
+                                    if (Model.localRecipe.Season == "Autumn")
+                                    {
+                                        <option value="Autumn" selected>Autumn</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Autumn">Autumn</option>
+                                    }
+
+                                    if (Model.localRecipe.Season == "Winter")
+                                    {
+                                        <option value="Winter" selected>Winter</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Winter">Winter</option>
+                                    }
+
+                                    if (Model.localRecipe.Season == "AllYearRound")
+                                    {
+                                        <option value="AllYearRound" selected>All Year Round</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="AllYearRound">All Year Round</option>
+                                    }
+
+                                    if (((Model.localRecipe.Season == "")
+                                        || (Model.localRecipe.Season is null)
+                                    || (Model.localRecipe.Season == "None")))
+                                    {
+                                        <option value="Blank" selected>-- none --</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="seasonChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33">
+                        <fieldset>
+                            <legend class="largeLegend">Cuisine:</legend>
+                            <select id="cuisine" name="cuisine" onchange="valueChange('cuisine')">
+                                @{
+                                    if (Model.localRecipe.Cuisine == "Belgian")
+                                    {
+                                        <option value="Belgian" selected>Belgian</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Belgian">Belgian</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "British")
+                                    {
+                                        <option value="British" selected>British</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="British">British</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Chinese")
+                                    {
+                                        <option value="Chinese" selected>Chinese</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Chinese">Chinese</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Dutch")
+                                    {
+                                        <option value="Dutch" selected>Dutch</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Dutch">Dutch</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "French")
+                                    {
+                                        <option value="French" selected>French</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="French">French</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Indian")
+                                    {
+                                        <option value="Indian" selected>Indian</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Indian">Indian</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Irish")
+                                    {
+                                        <option value="Irish" selected>Irish</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Irish">Irish</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Italian")
+                                    {
+                                        <option value="Italian" selected>Italian</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Italian">Italian</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Spanish")
+                                    {
+                                        <option value="Spanish" selected>Spanish</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Spanish">Spanish</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Thai")
+                                    {
+                                        <option value="Thai" selected>Thai</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Thai">Thai</option>
+                                    }
+
+                                    if (Model.localRecipe.Cuisine == "Other")
+                                    {
+                                        <option value="Other" selected>Other</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Other">Other</option>
+                                    }
+
+                                    if (((Model.localRecipe.Cuisine == "")
+                                        || (Model.localRecipe.Cuisine is null)
+                                    || (Model.localRecipe.Cuisine == "None")))
+                                    {
+                                        <option value="Blank" selected>-- none --</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="cuisineChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33">
+                        <fieldset>
+                            <legend class="largeLegend">Event:</legend>
+                            <select id="anevent" name="anevent" onchange="valueChange('anevent')">
+                                @{
+                                    if (Model.localRecipe.Event == "Christmas")
+                                    {
+                                        <option value="Christmas" selected>Christmas</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Christmas">Christmas</option>
+                                    }
+
+                                    if (Model.localRecipe.Event == "Birthday")
+                                    {
+                                        <option value="Birthday" selected>Birthday</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Birthday">Birthday</option>
+                                    }
+
+                                    if (Model.localRecipe.Event == "NewYear")
+                                    {
+                                        <option value="NewYear" selected>New Year</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="NewYear">New Year</option>
+                                    }
+
+                                    if (Model.localRecipe.Event == "Easter")
+                                    {
+                                        <option value="Easter" selected>Easter</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Easter">Easter</option>
+                                    }
+
+                                    if (Model.localRecipe.Event == "Party")
+                                    {
+                                        <option value="Party" selected>Party</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Party">Party</option>
+                                    }
+
+                                    if (Model.localRecipe.Event == "Barbeque")
+                                    {
+                                        <option value="Barbeque" selected>Barbeque</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Barbeque">Barbeque</option>
+                                    }
+
+                                    if (Model.localRecipe.Event == "SomethingElse")
+                                    {
+                                        <option value="SomethingElse" selected>Other</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="SomethingElse">Other</option>
+                                    }
+
+                                    if (((Model.localRecipe.Event == "")
+                                        || (Model.localRecipe.Event is null)
+                                    || (Model.localRecipe.Event == "None")))
+                                    {
+                                        <option value="blank" selected>-- none --</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="aneventChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33">
+                        <fieldset>
+                            <legend class="largeLegend">Dietary Requirement:</legend>
+                            <select id="dietaryRequirement" name="dietaryRequirement" onchange="valueChange('dietaryRequirement')">
+                                @{
+                                    if (Model.localRecipe.DietaryRequirement == "Gluten-free")
+                                    {
+                                        <option value="Gluten-free" selected>Gluten-free</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Gluten-free">Gluten-free</option>
+                                    }
+
+                                    if (Model.localRecipe.DietaryRequirement == "Kosher")
+                                    {
+                                        <option value="Kosher" selected>Kosher</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Kosher">Kosher</option>
+                                    }
+
+                                    if (Model.localRecipe.DietaryRequirement == "Halal")
+                                    {
+                                        <option value="Halal" selected>Halal</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Halal">Halal</option>
+                                    }
+
+                                    if (Model.localRecipe.DietaryRequirement == "Lactose-free")
+                                    {
+                                        <option value="Lactose-free" selected>Lactose-free</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Lactose-free">Lactose-free</option>
+                                    }
+
+                                    if (Model.localRecipe.DietaryRequirement == "Lactose-free")
+                                    {
+                                        <option value="Vegan" selected>Vegan</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Vegan">Vegan</option>
+                                    }
+
+                                    if (Model.localRecipe.DietaryRequirement == "Vegetarian")
+                                    {
+                                        <option value="Vegetarian" selected>Vegetarian</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Vegetarian">Vegetarian</option>
+                                    }
+
+                                    if (Model.localRecipe.DietaryRequirement == "NULL")
+                                    {
+                                        <option value="None">None</option>
+                                    }
+
+                                    if ((Model.localRecipe.DietaryRequirement == "")
+                                        || (Model.localRecipe.DietaryRequirement is null))
+                                    {
+                                        <option value="blank" selected>-- none --</option>
+                                    }
+                                }
+                            </select>
+                            <input type="hidden" id="dietaryRequirementChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2">
+                        <fieldset>
+                            <legend class="largeLegend">Goes With:</legend>
+                            <input type="text" id="goesWithNotes" class="clearDefault" name="goesWithNotes" placeholder="-- optional --"
+                                value="@Model.localRecipe.GoesWith" size="50" maxlength="150"
+                                onchange="valueChange('goesWithNotes')"><br />
+                            <input type="hidden" id="goesWithNotesChange" value="false">
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-50">
+                        <fieldset>
+                            <legend class="largeLegend">Additional Notes:</legend>
+                            @if (Model.localRecipe.AdditionalNotes == "")
+                            {
+                                <textarea name="additionalNotes" id="additionalNotes" class="clearDefault" rows="5" cols="50"
+                                    onchange="valueChange('additionalNotes')">-- none --</textarea><br />
+                                <input type="hidden" id="additionalNotesChange" value="false">
+                            }
+                            else
+                            {
+                                <textarea name="additionalNotes" id="additionalNotes" class="clearDefault" rows="5" cols="50"
+                                    onchange="valueChange('additionalNotes')">@Model.localRecipe.AdditionalNotes</textarea><br />
+                                <input type="hidden" id="additionalNotesChange" value="false">
+                            }
+                        </fieldset>
+                    </div>
+                </div>
+            </div>      
+
+            <div class="sectionDiv">
+
+                <container class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+
+                </container>
+
+                <input type="hidden" id="ingredientCountVId" class="hide" name="ingredientCountVName"
+                        value=@Model.localRecipe.IngredientNames.Count>
+
+                @for (int i = 1; i < (Model.localRecipe.IngredientNames.Count + 1); i++)
+                {
+                    var @containerId = "ingredientContainerId" + @Model.localRecipe.RecipeIngredientIdents[i - 1];
+                    var @newId = "ingredientsVId" + i.ToString();
+                    var @newList = "ingredientsVList" + i.ToString();
+                    var @newAmountId = "ingredientsVAmountId" + i.ToString();
+                    var @oldUOMFullAmount = "ingredientsVFullAmount" + i.ToString();
+                    var @newUOMId = "ingredientsVUOMId" + i.ToString();
+                    var @oldUOMId = "ingredientsVUOMIdOld" + i.ToString();
+                    var @newCommentId = "ingredientsVCommentId" + i.ToString();
+
+                    var @formatAmount = "";
+                    if (@Model.localRecipe.IngredientViewAmounts[i - 1] % 1 == 0)
+                    {
+                        formatAmount = string.Format("{0:n0}", @Model.localRecipe.IngredientViewAmounts[i - 1]);
+                    }
+                    else
+                    {
+                        formatAmount = string.Format("{0:n2}", @Model.localRecipe.IngredientViewAmounts[i - 1]);
+                    }
+
+                    var @deleteId = "ingredientsVDeleteId" + i.ToString();
+
+                    <container id=@containerId class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                        <fieldset class="p-2 flex-shrink-1">
+                            @if (i == 1)
+                            {
+                                <legend class="smallLegend headeralign">Ingredient:</legend>
+                            }
+                            <input id=@newId class="ingredient" list=@newList required style="width:13em" value="@Model.localRecipe.IngredientNames[i - 1]" />
+                            <datalist id=@newList></datalist>
+                        </fieldset>
+
+                        <fieldset class="p-2 flex-shrink-1">
+                            @if (i == 1)
+                            {
+                                <legend class="smallLegend headeralign">Amount:</legend>
+                            }
+                            <input type="number" id=@newAmountId name="quantity" min="0" max="1000000" style="width:5em" placeholder="0" value=@formatAmount />
+                            <input type="hidden" id=@oldUOMFullAmount name="quantity"
+                                    value="@Model.localRecipe.IngredientBaseAmounts[i - 1]" /><br />
+                        </fieldset>
+
+                        <fieldset class="p-2 flex-shrink-1">
+                            @if (i == 1)
+                            {
+                                <legend class="smallLegend headeralign">Unit Of Measure:</legend>
+                            }
+                            <select id=@newUOMId name=@newUOMId style="width:12em" />
+                            <input type="hidden" id=@oldUOMId name=@oldUOMId value="@Model.localRecipe.OriginalUnitOfMeasures[i - 1]" />
+                        </fieldset>
+
+                        <fieldset class="p-2 flex-grow-1">
+                            @if (i == 1)
+                            {
+                                <legend class="smallLegend headeralign">Notes:</legend>
+                            }
+                            <textarea id=@newCommentId name=@newCommentId class="clearDefault ingredNotes" rows="1" style="width:22em"
+                                        placeholder="--optional--">@Model.localRecipe.IngredientComments[i - 1]</textarea><br />
+                        </fieldset>
+
+                        <fieldset class="p-3 flex-grow-1 ingredDeletes">
+                            @if (i == 1)
+                            {
+                                <legend class="smallLegend headeralign">Delete:</legend>
+                            }
+                            <br /><input type="button" class="btn, btn-danger delButton" onclick="deleteRow('@containerId')" style="width:3em" value="X">
+                        </fieldset>
+                    </container>
+                }
+            </div>
+
+            <!-- add new ingredient row -->
+            <div id="newIngredientDiv" class="hide"></div>
+            <br class="hide lineBreaks" />
+            <br class="hide lineBreaks" />
+            <button type="button" id="newIngredientButton" class="btn btn-primary" onclick="addIngredient()">Add Ingredient
+                Row</button>
+            <br class="lineBreaks" />
+            <br class="lineBreaks" />
+
+            <!-- add new ingredient -->
+            <a button type="button" class="btn btn-info" id="addNewIngredientButton" data-ajax="true" data-ajax-method="GET"
+                data-ajax-mode="replace" data-ajax-update="#addNewIngredientDiv" href="/Edit/GetNewIngredientView"
+                data-ajax-success="positionNewIngredient()">
+                Add New Ingredient
+            </a>
+
+            <div id="addNewIngredientDiv"></div>
+
+            <br class="lineBreaks" />
+            <br class="lineBreaks" />
+
+            <div class="sectionDiv">
+
+                <container class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                    <fieldset class="flex-shrink-1" style="width:32em">
+                        <legend class="smallLegend headeralign">Instruction:<br /></legend>
+                    </fieldset>
+                    <fieldset style="width:10em">
+                        <legend class="smallLegend headeralign">Temperature<br />(if required):</legend>
+                    </fieldset>
+                    <fieldset style="width:8.5em">
+                        <legend class="smallLegend headeralign">Temperature Unit<br />(if required):</legend>
+                    </fieldset>
+                    <fieldset class="flex-grow-1 ingredDeletes">
+                        <legend class="smallLegend headeralign"></legend>
+                    </fieldset>
+                </container>
+                <br />
+
+                <input type="hidden" id="instructsCountVId" name="instructsCountVName"
+                       value="@Model.localRecipe.InstructionDescriptions.Count">
+                @for (int s = 1; s < (Model.localRecipe.InstructionDescriptions.Count + 1); s++)
+                {
+                    var @containerId = "instructionContainerId" + @Model.localRecipe.RecipeInstructionIdents[s - 1];
+                    var @newId = "instructionVId" + s.ToString();
+                    var @newName = "instructionVName" + s.ToString();
+                    var @newTempId = "instructionVTempId" + s.ToString();
+                    var @newTempName = "instructionVTempName" + s.ToString();
+                    var @oldTempFullAmount = "instructionVFullAmount" + s.ToString();
+                    var @newTempUoMId = "instructionVTempUoMId" + s.ToString();
+                    var @newTempUoMName = "instructionVTempUoMName" + s.ToString();
+                    var @oldTempUOMId = "instructionVTempUOMIdOld" + s.ToString();
+                    var @newIdDelete = "instructionVDeleteId" + s.ToString();
+
+                    var formatTemperature = "";
+                    if (@Model.localRecipe.TemperatureValues[s - 1] % 1 == 0)
+                    {
+                        formatTemperature = string.Format("{0:n0}", @Model.localRecipe.TemperatureValues[s - 1]);
+                    }
+                    else
+                    {
+                        formatTemperature = string.Format("{0:n2}", @Model.localRecipe.TemperatureValues[s - 1]);
+                    }
+
+                    <container id=@containerId class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                        <fieldset class="p-6 flex-shrink-1">
+                            <textarea id=@newId name=@newName class="instruction clearDefault autoresizing instructNotes" rows="3"
+                                      style="width:32em" placeholder="-- Step @s --"
+                                      required>@Model.localRecipe.InstructionDescriptions[s-1]</textarea><br />
+                        </fieldset>
+                        <fieldset class="p-3">
+                            @if (Model.localRecipe.TemperatureValues[s - 1] > 0)
+                            {
+                                <input type="number" id=@newTempId name="quantity" class="clearDefault noSpinners" min="1"
+                                       max="500" style="width:10em" value="@formatTemperature" /><br />
+                                <input type="hidden" id=@oldTempFullAmount name=@oldTempFullAmount
+                                       value="@Model.localRecipe.TemperatureBaseValues[s - 1]" /><br />
+                            }
+                            else
+                            {
+                                <input type="number" id=@newTempId name="quantity" class="clearDefault noSpinners" min="1"
+                                       max="500" style="width:10em" value="0" /><br />
+                            }
+                        </fieldset>
+                        <fieldset class="p-3">
+                            <select id=@newTempUoMId name=@newTempUoMName class="clearDefault" placeholder="optional"
+                                    style="width:8.5em" value="@Model.localRecipe.OriginalTemperatureUnitOfMeasure[s - 1]" />
+                            <input type="hidden" id=@oldTempUOMId name=@oldTempUOMId
+                                   value="@Model.localRecipe.OriginalTemperatureUnitOfMeasure[s - 1]">
+                        </fieldset>
+                        <fieldset class="p-3 flex-grow-1 ingredDeletes">
+                            <input type="button" class="btn, btn-danger delButton align-self-end" onclick="deleteRow('@containerId')"
+                                   value="X" />
+                            <br />
+                        </fieldset>
+                    </container>
+                }
+            </div>
+
+            <div id="newInstructionDiv"></div>
+            <br class="hide lineBreaks" />
+
+            <br class="hide lineBreaks" />
+            <button type="button" id="newInstructionButton" class="btn btn-primary" onclick="addNewInstructionRow()">Add
+                Instruction Row</button>
+            <br class="lineBreaks" />
+            <br class="lineBreaks" />
+
+            <br class="lineBreaks" />
+            <button type="button" class="btn btn-default btn-danger btn-clock" id="updateRecipeButton" value="Submit"
+                onclick="updateRecipe('@Model.localRecipe.RecipeIdent')">
+                <span id="updateRecipeButtonSpan" class="glyphicon glyphicon-off">Save Changes</span>
+            </button>
+            <br class="lineBreaks" />
+            <br class="lineBreaks" />        
+        </form>
+
+    </div>
+</div>
+
+<script>
+    var url1 = "/js/editRecipe.js";
+    $.getScript(url1);
+</script>
+
+<script>
+    var url2 = "/js/addIngredient.js";
+    $.getScript(url2);
+</script>

@@ -1,0 +1,58 @@
+﻿<div id="formDiv" class="showHide">
+    <form id="addIngredientFormId"  asp-controller="Add" asp-action="AddIngredient" method="POST" role="form" onsubmit="processNewIngredient()">
+        <div class="form-group">
+
+            <div id="ingredientNameFeedbackDivId" class="hide">
+                <p id="ingredientNameFeedbackParaId" class="hide"></p>
+            </div>
+
+            <fieldset>
+                <legend>Name Singular:</legend>
+                <input type="text" id="newIngredientSingularId" name="newIngredientSingularName" required />
+            </fieldset>
+
+            <fieldset>
+                <legend>Name Plural:</legend>
+                <input type="text" id="newIngredientPluralId" name="newIngredientPluralName" required />
+            </fieldset>
+
+            <fieldset>
+                <legend>Food Category:</legend>
+                <select id="newIngredientFoodCategoryId" name="newIngredientFoodCategoryName" style="width:150px" required />
+            </fieldset>
+
+            <fieldset>
+                <legend>Dry or Wet Measure?</legend>
+                <select id="dryOrWetMeasureId" name="dryOrWetMeasureName" style="width:100px" required>
+                    <option disabled selected placeholder="-- select --" required></option>
+                    <option value="Dry">Dry</option>
+                    <option value="Wet">Wet</option>
+                </select>
+            </fieldset>
+
+            <br />
+            <button type="button" class="btn btn-default btn-success btn-clock" style="display: inline;"
+                    id="addIngredientButton" value="Submit" onclick="processIngredient()">
+                <span class="glyphicon glyphicon-off">Submit</span>
+            </button>
+            <br />
+
+            <br />                                               
+            <button type="button" class="btn btn-default btn-danger btn-clock" style="display: inline;"
+                    id="closeAddIngredientFormButton" onclick="closeAddIngredientForm()">
+                <span class="glyphicon glyphicon-off">Cancel</span>
+            </button>
+
+        </div>
+    </form>
+    <hr />
+</div>
+
+<script>
+    var url = "/js/addIngredient.js";
+    $.getScript(url);
+</script>
+
+
+
+

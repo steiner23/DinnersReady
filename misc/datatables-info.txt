@@ -1,0 +1,34 @@
+
+//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css
+
+//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js
+
+
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+
+
+Recipe Name            		-> Name
+Description
+Meal                             		-> Meal
+Cooking Method     		-> Method
+Cooking Time           		-> Time
+Servings	                  		-> Servings
+Freezable			-> Freezable
+Main Food Category 		-> Category
+Season			-> Season		
+Cuisine			-> Cuisine
+Event			-> Event
+Dietary Requirement	-> Dietary Requirement
+Additional Notes		
+Goes With		-> Goes With?
+
+Ingredients		-> ingredients (as list) (or long string)
+Instructions
+
+
+
+GetRecipes
+GetRecipesLike
+

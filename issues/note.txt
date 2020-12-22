@@ -1,0 +1,45 @@
+CheckSeasonValid
+CheckCuisineValid
+CheckEventValid
+CheckDietaryRequirement
+CheckMainIngredient  (0 is bad)
+
+for each ingredient:
+CheckIngredient (0 is bad)
+CheckUnitOfMeasure (0 is bad)
+
+
+/Add/ProcessNewRecipe"
+
+
+            "recipeName":               $("#" + recipeName).val(),
+            "description":              $("#" + description).val(),
+            "course":                   $("#" + course).val(),
+            "cookingMethod":            $("#" + cookingMethod).val(),
+            "servings":                 $("#" + servings).val(),
+            "cookingTime":              $("#" + cookingTime).val(),
+            ingredientsName:            ingredientsValue,
+            amountsName:                amountsValue,
+            uomName:                    uomVals,
+            instructionsName:           instructionsValue,
+            instructionTempName:        instructionTempValue,
+            originalTemperatureUoMName: originalTemperatureUoMNameVal,
+            "additionalNotes":          $("#" + additionalNotes).val(),
+            "goesWithNotes":            $("#" + goesWithNotes).val(),
+            "season":                   $("#" + season).val(),
+            "cuisine":                  $("#" + cuisine).val(),
+            "event":                    $("#" + event).val(),
+            "dietaryRequirement":       $("#" + dietaryRequirement).val(),
+            "freezable":                $("#" + freezable).val(),
+            "mainFoodCategory":         $("#" + mainFoodCategory).val(),
+            "thumbnailPath":            $("#" + recipeimage).val()
+
+
+
+            string recipeName string description, string thumbnailPath, string course,
+            string cookingMethod, string servings, string cookingTime, string additionalNotes,
+            string goesWithNotes, string season, string cuisine, string event,
+            string dietaryRequirement, bool freezable, string mainFoodCategory,
+            List<string>  ingredientsName, List<string> amountsName, List<string> uomName:,
+            List<string> instructionsName, List<string> instructionTempName,
+            List<string> originalTemperatureUoMName)

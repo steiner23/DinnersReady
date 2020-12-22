@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAptMW5h0EoECqCu2VpNm3RAAAAAACAAAAAAAQZgAAAAEAACAAAACtj7ep6Nr9HGWE91lGDIQuCeTVmhSSVzAqQVHIZ9alAQAAAAAOgAAAAAIAACAAAAD+LKK2pYHVdRBGOMGXYJmBfgj7Cp3MuSibbdhtTH52cDAAAACom1FpfpXLVojvusnj+OjvlLIzy1yo2fmr4Xi6/+F9RT6w9lmCcOZdX2fCq7dfnuJAAAAAaNirjhbFM2F1UDhHOSze6Ru9ASTkappOaM9lZPb3hcOpnX78H2ZoOiMUYxmEpiYxcy7SvSAl2Bn4CMycT0WlrA==</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="AppDbContextConnection">
+      <Value>Server = tcp:sql6010.site4now.net,1433%3bInitial Catalog = DB_A4D4A2_dinnersready%3bPersist Security Info = False%3bUser ID=DB_A4D4A2_dinnersready_admin%3b Password=octante!vrai^78-%2a%3b MultipleActiveResultSets = True%3bEncrypt = True%3b TrustServerCertificate = True%3bConnection Timeout = 30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

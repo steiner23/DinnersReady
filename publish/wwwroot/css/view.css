@@ -1,0 +1,55 @@
+input:disabled {
+  color: #000000;
+  background-color: #fbde75;
+}
+
+textarea:disabled {
+  color: #000000;
+  background-color: #fbde75;
+  resize: none;
+}
+
+#breakfast:disabled, #lunch:disabled, #dinner:disabled, #other:disabled, input[type=checked]:disabled {
+  color: #000000;
+  font-weight: bold;
+  background-color: #fbde75;
+}
+
+radio:disabled, #trueFreeze, #falseFreeze {
+  color: #000000;
+  background-color: #fbde75;
+}
+
+select:disabled {
+  color: #000000;
+  background-color: #fbde75;
+}
+
+select:enabled {
+  color: #000000;
+  font-weight: bold;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera, Firefox*/
+select:disabled {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.unblockScroll {
+  cursor: default !important;
+  pointer-events: all !important;
+}
+/*# sourceMappingURL=view.css.map */

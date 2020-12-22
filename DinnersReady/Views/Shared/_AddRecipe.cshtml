@@ -1,0 +1,394 @@
+﻿@model DinnersReadyCore.ViewModels.AddRecipe.AddVM
+
+<div id="alertBannerPlaceholder"></div>
+
+<div class="container-fluid d-flex justify-content-center wrap shadow mt-4">
+    <h1 id="mainHeader" class="backgroundTitleProps3">Add Your Recipe Here:</h1>
+    <br />
+</div>
+
+<div class="container-fluid mt-3">
+
+    <div class="container container-fluid">
+        <form id="recipeForm" asp-controller="AddController" asp-action="Recipe" method="POST">
+
+            <div asp-validation-summary="All"></div>
+
+            <div id="recipeFeedbackDivId" class="hide">
+                <p id="recipeFeedbackParaId" class="hide"></p>
+            </div>
+
+            <div class="sectionDiv">            
+                <div class="d-flex flex-wrap justify-content-start justify-content-between">
+                
+                    <div class="flex-column">
+                        <div class="recipeview m-2 p-2 align-middle w-50">
+                            <fieldset>
+                                <legend class="largeLegend"><span class=keyfield>*</span>Recipe Name:</legend>
+                                <input type="text" id="recipeName" name="recipeName" style="width:24em" size="49" maxlength="150" required><br />
+                            </fieldset>
+                        </div>
+
+                        <div class="recipeview m-2 p-2 align-middle w-50">
+                            <fieldset>
+                                <legend class="largeLegend"><span class=keyfield>*</span>Description:</legend>
+                                <input type="text" id="description" name="description" style="width:24em" size="49" maxlength="150"
+                                    placeholder="-- optional --"><br />
+                            </fieldset>
+                        </div>
+
+                        <div id="servingsDiv" class="recipeview m-2 p-2 align-middle w-33">
+                            <fieldset>
+                                <legend class="largeLegend"><span class=keyfield>*</span>Servings:</legend>
+                                <input type="number" id="servings" name="servings" min="1" max="100" placeholder="0" required /><br />
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div id="courseDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset id="course" class="course-checkbox" required>
+                            <legend class="largeLegend"><span class=keyfield>*</span>Meal:</legend>
+                            <input type="checkbox" id="breakfast" class="coursecheck" name="breakfast" value="Breakfast" />
+                            <label for="breakfast" class="courselabel">Breakfast</label><br />
+                            <input type="checkbox" id="lunch" class="coursecheck" name="lunch" value="Lunch" />
+                            <label for="lunch" class="courselabel">Lunch</label><br />
+                            <input type="checkbox" id="dinner" class="coursecheck" name="dinner" value="Dinner" />
+                            <label for="dinner" class="courselabel">Dinner</label><br />
+                            <input type="checkbox" id="other" class="coursecheck" name="other" value="Other" />
+                            <label for="other" class="courselabel">Other</label><br />
+                        </fieldset>
+                    </div>
+
+                    <div class="flex-column">
+                        <div class="recipeview m-2 p-2 align-middle w-50">
+                            <br />
+                            <fieldset>
+                                <label for="recipefile" style="cursor: pointer">Upload a Recipe Photo (optional)</label>
+                                <input type="file" id="recipeimage" name="recipeimage" accept="image/*" onchange="displayimage(event)"
+                                    value="-- optional --"><br />
+                                <img id="fileoutput" width="200" height="200" />
+                            </fieldset><br />
+                        </div>
+                    </div>
+
+                    <div id="cookingmethodDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset required>
+                            <legend class="largeLegend"><span class=keyfield>*</span>Cooking Method:</legend>
+                            <select id="cookingMethod" name="cookingMethod">
+                                <option disabled selected value="blank">-- select option --</option>
+                                <option value="Oven">Oven</option>
+                                <option value="Hob">Hob</option>
+                                <option value="Slowcooker">Slow Cooker</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </fieldset>
+                    </div>
+
+                    <div id="cookingTimeDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset required>
+                            <legend class="largeLegend"><span class=keyfield>*</span>Cooking Time:</legend>
+                            <select id="cookingTime" name="cookingTime" required>
+                                <option disabled selected value="blank">-- select option --</option>
+                                <option value="minsLessThan30">Less than 30 mins</option>
+                                <option value="mins30to59">30 to 60 mins</option>
+                                <option value="mins60to90">60 to 90 mins</option>
+                                <option value="mins90to120">90 to 120 mins</option>
+                                <option value="minsover120">Over 120 mins</option>
+                            </select>
+                        </fieldset>
+                    </div>
+
+                    <div id="freezeDiv" class="recipeview m-2 p-2 align-middle w-33">
+                        <fieldset>
+                            <legend class="largeLegend"><span class=keyfield>*</span>Freezable?</legend>
+                            <label for="yes">Yes</label>
+                            <input type="radio" id="trueFreeze" name="freezable" value="Yes" required />
+                            <label for="no">No</label>
+                            <input type="radio" id="falseFreeze" name="freezable" value="No" required /><br />
+                        </fieldset>
+                    </div>
+
+                    <div id="mainFoodCatDiv" class="recipeview m-2 p-2 w-33 align-middle">
+                        <fieldset>
+                            <legend class="largeLegend"><span class=keyfield>*</span>Main Food Category:</legend>
+                            <select id="mainFoodCategory" name="mainFoodCategory" value="-- select an option --">
+                                <option disabled selected value="blank">-- options --</option>
+                                @foreach (var category in Model.MainFoodCategories)
+                                {
+                                    <option value=@category>@category</option>
+                                }
+                            </select>
+                        </fieldset><br />
+                    </div>
+
+                    <hr />
+
+                    <div class="recipeviewopt m-2 p-2 w-33 opt">
+                        <fieldset>
+                            <legend class="largeLegend">Season</legend>
+                            <select id="season" name="season" value="-- select an option --">
+                                <option disabled selected value="blank">-- options --</option>
+                                <option value="Spring">Spring</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Autumn">Autumn</option>
+                                <option value="Winter">Winter</option>
+                                <option value="AllYearRound">All Year Round</option>
+                                <option value="None">None</option>
+                            </select>
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33 opt">
+                        <fieldset>
+                            <legend class="largeLegend">Cuisine:</legend>
+                            <select id="cuisine" name="cuisine">
+                                <option disabled selected value="blank">-- options --</option>
+                                <option value="Belgian">Belgian</option>
+                                <option value="British">British</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Dutch">Dutch</option>
+                                <option value="French">French</option>
+                                <option value="Indian">Indian</option>
+                                <option value="Irish">Irish</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Thai">Thai</option>
+                                <option value="SomethingElse">Other</option>
+                                <option value="None">None</option>
+                            </select>
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33 opt">
+                        <fieldset>
+                            <legend class="largeLegend">Event:</legend>
+                            <select id="anevent" name="anevent">
+                                <option disabled selected value="blank">-- options --</option>
+                                <option value="Christmas">Christmas</option>
+                                <option value="Birthday">Birthday</option>
+                                <option value="NewYear">New Year</option>
+                                <option value="Easter">Easter</option>
+                                <option value="Party">Party</option>
+                                <option value="Barbeque">Barbeque</option>
+                                <option value="SomethingElse">Other</option>
+                                <option value="None">None</option>
+                            </select>
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 w-33 opt">
+                        <fieldset>
+                            <legend class="largeLegend">Dietary Requirement:</legend>
+                            <select id="dietaryRequirement" name="dietaryRequirement">
+                                <option disabled selected value="blank">-- options --</option>
+                                <option value="Kosher">Kosher</option>
+                                <option value="Gluten-free">Gluten-free</option>
+                                <option value="Halal">Halal</option>
+                                <option value="Lactose-free">Lactose-free</option>
+                                <option value="Vegan">Vegan</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="None">None</option>
+                            </select>
+                        </fieldset>
+                    </div>
+
+                    <div class="recipeviewopt m-2 p-2 opt">
+                        <fieldset>
+                            <legend class="largeLegend">Goes With:</legend>
+                            <input type="text" id="goesWithNotes" class="clearDefault" name="goesWithNotes" placeholder="-- optional --"
+                                size="50" maxlength="150"><br />
+                        </fieldset>
+                    </div>                    
+
+                    <div class="recipeviewopt m-2 p-2 w-50 opt">
+                        <fieldset>
+                            <legend class="largeLegend">Additional Notes:</legend>
+                            <textarea name="additionalNotes" id="additionalNotes" class="clearDefault" rows="5" cols="50"
+                                placeholder="-- optional --"></textarea><br />
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sectionDiv">
+                <!-- generates the 5 initial sets of Ingredients, Amount and Units of Measure fields -->
+                <container id="EditIngredHeadersId" class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                    <fieldset class="p-2 flex-shrink-1" style="width:13em">
+                        <legend class="smallLegend headeralign">Ingredient:</legend>
+                    </fieldset>
+                    <fieldset class="p-2 flex-shrink-1" style="width:5em">
+                        <legend class="smallLegend headeralign">Amount:</legend>
+                    </fieldset>
+                    <fieldset class="p-2 flex-shrink-1" style="width:12em">
+                        <legend class="smallLegend headeralign">Unit Of Measure:</legend>
+                    </fieldset>
+                    <fieldset class="p-2 flex-grow-1" style="width:22em">
+                        <legend class="smallLegend headeralign">Note:</legend>
+                    </fieldset>
+                </container>
+
+                @for (int i = 1; i < 6; i++)
+                {
+                    var @newContainer = "ingredientsIdContainer" + i.ToString();
+                    var @newId = "ingredientsId" + i.ToString();
+                    var @newList = "ingredientsList" + i.ToString();
+                    var @newAmountId = "ingredientsAmountId" + i.ToString();
+                    var @newUOMId = "ingredientsUOMId" + i.ToString();
+                    var @newUOLlist = "ingredientsUOMList" + i.ToString();
+                    var @newCommentId = "ingredientsCommentId" + i.ToString();
+                    var @newRemoveId = "ingredientsButtonId" + i.ToString();
+
+                    if (i == 1)
+                    {
+                        <container id=@newContainer class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                            <fieldset class="p-2 flex-shrink-1" style="width:13em">
+                                <input id=@newId list=@newList required />
+                                <datalist id=@newList></datalist>
+                            </fieldset>
+                            <fieldset class="p-2 flex-shrink-1" style="width:5em">
+                                <input type="number" id=@newAmountId name="quantity" min="0" max="1000000" placeholder="0" /><br />
+                            </fieldset>
+                            <fieldset class="p-2 flex-shrink-1" style="width:12em">
+                                <select id=@newUOMId name=@newUOMId>
+                                    <option value="" disabled selected></option>
+                                </select>
+                            </fieldset>
+                            <fieldset class="p-2 flex-grow-1" style="width:22em">
+                                <textarea id=@newCommentId name=@newCommentId class="clearDefault" rows="1" cols="50"
+                                    placeholder="--optional--"></textarea><br />
+                            </fieldset>
+                        </container>
+                    }
+                    else
+                    {
+                        <container id=@newContainer class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                            <fieldset class="p-2 flex-shrink-1" style="width:13em">
+                                <input id=@newId list=@newList />
+                                <datalist id=@newList></datalist>
+                            </fieldset>
+                            <fieldset class="p-2 flex-shrink-1" style="width:5em">
+                                <input type="number" id=@newAmountId name="quantity" min="0" max="1000000" placeholder="0" /><br />
+                            </fieldset>
+                            <fieldset class="p-2 flex-shrink-1" style="width:12em">
+                                <select id=@newUOMId name=@newUOMId style="width:140px">
+                                    <option value="" disabled selected></option>
+                                </select>
+                            </fieldset>
+                            <fieldset class="p-2 flex-grow-1" style="width:22em">
+                                <textarea id=@newCommentId name=@newCommentId class="clearDefault" rows="1" cols="50"
+                                    placeholder="--optional--"></textarea><br />
+                            </fieldset>
+                        </container>
+                    }
+                }
+            </div>
+
+            <!-- add new ingredient row -->
+            <div id="newIngredient"></div><br />
+            <br /><button type="button" disabled id="newIngredientButton" class="btn btn-primary" onclick="addIngredient()">Add
+                Ingredient Row</button><br /><br />
+
+            <!-- add new ingredient -->
+            <a button type="button" class="btn btn-info" id="addNewIngredientButton" data-ajax="true" data-ajax-method="GET"
+                data-ajax-mode="replace" data-ajax-update="#addNewIngredient" href="/Add/GetNewIngredientView"
+                data-ajax-success="positionNewIngredient()">
+                Add New Ingredient
+            </a>
+
+            <div id="addNewIngredient"></div><br />
+            <br />
+
+            <div class="sectionDiv">       
+                <!-- generates the 5 initial Instruction Step and optional temperature amounts and fields -->
+                <container id="EditInstructHeadersId" class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                    <fieldset class="flex-shrink-1" style="width:37em">
+                        <legend class="smallLegend headeralign">Instruction:</legend>
+                    </fieldset>
+                    <fieldset style="width:10em">
+                        <legend class="smallLegend headeralign">Temperature<br />(if required):</legend>
+                    </fieldset>
+                    <fieldset style="width:8.5em">
+                        <legend class="smallLegend headeralign">Temperature Unit<br />(if required):</legend>
+                    </fieldset>
+                </container>
+                <br />
+
+                @for (int s = 1; s < 6; s++)
+                {
+                    var @newContainer = "instructionIdContainer" + s.ToString();
+                    var @newId = "instructionId" + s.ToString();
+                    var @newName = "instructionName" + s.ToString();
+                    var @newTempId = "instructionTempId" + s.ToString();
+                    var @newTempName = "instructionTempName" + s.ToString();
+                    var @newTempUoMId = "instructionTempUoMId" + s.ToString();
+                    var @newTempUoMName = "instructionTempUoMName" + s.ToString();
+                    var @newRemoveId = "instructionButtonId" + s.ToString();
+
+                    if (s == 1)
+                    {
+                        <container id="@newContainer" class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                            <fieldset class="p-6 flex-shrink-1">
+                                <textarea id=@newId name=@newName class="clearDefault" rows="1" style="width:37em" placeholder="-- Step @s --"
+                                    required></textarea><br />
+                            </fieldset>
+                            <fieldset class="p-3">
+                                <input type="number" id=@newTempId name=@newTempName class="clearDefault" min="1" max="999" style="width:10em"
+                                    placeholder="--optional--" /><br />
+                            </fieldset>
+                            <fieldset class="p-3">
+                                <select id=@newTempUoMId name=@newTempUoMName class="clearDefault" style="width:8.5em">
+                                    <option value="" disabled selected>--optional--</option>
+                                </select>
+                            </fieldset>
+                        </container>
+                    }
+                    else
+                    {
+                        <container class="d-inline-flex flex-row flex-fill wrap justify-content-between align-content-start align-items-start">
+                            <fieldset class="p-6 flex-shrink-1">
+                                <textarea id=@newId name=@newName class="clearDefault" rows="1" style="width:37em" placeholder="-- Step @s --"></textarea><br />
+                            </fieldset>
+                            <fieldset class="p-3">
+                                <input type="number" id=@newTempId name=@newTempName class="clearDefault" min="1" max="999" style="width:10em"
+                                    placeholder="--optional--" /><br />
+                            </fieldset>
+                            <fieldset class="p-4">
+                                <select id=@newTempUoMId name=@newTempUoMName class="clearDefault" placeholder="-optional-" style="width:8.5em">
+                                    <option value="" disabled selected>--optional--</option>
+                                </select>
+                            </fieldset>
+                        </container>
+                    }
+                }
+            </div>
+
+            <div id="newInstruction"></div><br />
+
+            <br /><button type="button" disabled id="newInstructionButton" class="btn btn-primary"
+                onclick="addNewInstructionRow()">Add Instruction Row</button><br /><br />
+
+            <br />
+            <button type="button" class="btn btn-default btn-danger btn-clock" style="display: inline;" id="addRecipeButton"
+                value="Submit" onclick="processRecipe()">
+                <span class="glyphicon glyphicon-off">Add Recipe</span>
+            </button>
+            <br />
+            <br /><input type="reset" class="btn btn-dark" />
+        </form>
+    
+    </div>
+</div>
+
+<script>
+    var url1 = "/js/addRecipe.js";
+    $.getScript(url1);
+</script>
+
+<script>
+    var url2 = "/js/addIngredient.js";
+    $.getScript(url2);
+</script>
+
+<script>
+    displayMessage();
+</script>

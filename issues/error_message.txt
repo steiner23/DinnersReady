@@ -1,0 +1,19 @@
+Local
+Exception: TypeError: Failed to execute 'decode' on 'HTMLImageElement': Illegal invocation at i (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71314) at jt (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71206) at jt (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71229) at Function.w.param (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71505) at Function.ajax (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:75803) at processRecipe (<anonymous>:504:11) at HTMLButtonElement.onclick (https://localhost:5001/:1:1)
+message: "Failed to execute 'decode' on 'HTMLImageElement': Illegal invocation"
+stack: "TypeError: Failed to execute 'decode' on 'HTMLImageElement': Illegal invocation↵    at i (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71314)↵    at jt (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71206)↵    at jt (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71229)↵    at Function.w.param (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:71505)↵    at Function.ajax (https://localhost:5001/lib/jquery/dist/jquery.min.js:2:75803)↵    at processRecipe (<anonymous>:504:11)↵    at HTMLButtonElement.onclick (https://localhost:5001/:1:1)"
+__proto__: Error
+e: "recipeimage[decode]"
+n: undefined
+t: ƒ decode()
+arguments: (...)
+caller: (...)
+length: 0
+name: "decode"
+__proto__: ƒ ()
+[[Scopes]]: Scopes[0]
+this: undefined
+Closure (w.param)
+Closure
+Window
+Global

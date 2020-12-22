@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="imag/ico" href="~/images/favicon.ico">
+    <title>Dinner's Ready!</title>
+    <link href="~/css/reset.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/alertify/alertify.min.css" />
+    <link rel="stylesheet" href="~/css/alertify/themes/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Animate.css" />
+    <link href="~/lib/fontawesome-free-5.15.1-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+
+<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet">
+    <nav class="navbar h-navbar navbar-expand-md site-navbar p-0 fixed-top" role="navigation" id="pb-navbar">
+        <div class="container navContainer">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsCollapse"
+                aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <img id="logo" class="logo" src="~/images/icon.svg" alt="Dinner's Ready Logo"
+                    asp-append-version="true" />
+            </a>
+
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsCollapse"
+                style="font-size: 20px">
+
+                <ul class="nav navbar-nav ml-auto">
+
+                    <li class="nav-link">
+                        <a asp-controller="List" asp-action="_AllRecipes" class="btn btn-primary" data-ajax="true"
+                            data-ajax-loading="#viewLoading" data-ajax-method="GET" data-ajax-mode="replace"
+                            data-ajax-update="#viewTarget">
+                            VIEW RECIPES
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a asp-controller="Add" asp-action="Recipe" class="btn btn-primary" data-ajax="true"
+                            data-ajax-loading="#viewLoading" data-ajax-method="GET" data-ajax-mode="replace"
+                            data-ajax-update="#viewTarget">
+                            ADD RECIPE
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+
+        @RenderBody()
+
+        <div id="viewTarget"></div>
+
+    </div>
+
+    <hr class="recipesBreak" />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Dinner's Ready!</p>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.mim.js"></script>
+    <script src="~/lib/microsoftAjax/MicrosoftAjax.js"></script>
+    <script src="~/lib/microsoftAjax/MicrosoftMvcAjax.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/alertify.min.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/lib/fontawesome-free-5.15.1-web/js/fontawesome.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>

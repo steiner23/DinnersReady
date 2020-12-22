@@ -1,0 +1,39 @@
+﻿<link href="~/css/site.css" rel="stylesheet" />
+
+<div id="preloader"></div>
+
+<h1 class="backgroundTitleProps1">Welcome to Dinner's Ready!</h1>
+<h2 class="backgroundTitleProps2">Here are our dishes:</h2>
+
+<br />
+<hr class="recipesBreak" />
+
+<link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<div id="recipesLoading"></div>
+
+<container id="recipesContainer" class="d-flex flex-row align-content-stretch backgroundTableProps">
+</container>
+
+<div class="callout">
+    <div class="callout-header">Important</div>
+    <span id="webDevCalloutBtn" class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <div class="callout-container">
+        <p>
+            This is not a real recipe website! <br>
+            It is a Web Development project undertaken for educational purposes.
+        </p>
+    </div>
+</div>
+
+</div>
+
+<script>
+    var url1 = "/js/jquery.dataTables.min.js";
+    $.getScript(url1);
+</script>
+
+<script>
+    var url2 = "/js/allRecipes.js";
+    $.getScript(url2);
+</script>
